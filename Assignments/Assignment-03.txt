@@ -1,0 +1,13 @@
+1) Does ANSI recognize the data type DATE?
+Ans: date complies with the ANSI SQL standard definition for the Gregorian calendar: 
+	 "NOTE 85 - Datetime data types will allow dates in the Gregorian format to be stored in the date range 0001-01-01 CE through 9999-12-31 CE."
+	 
+2) Which subdivision of SQL is used to insert values in tables?
+Ans: DML (Data Manipulation Language)
+	 INSERT INTO table_name (column1, column2, column3, ...)
+	 VALUES (value1, value2, value3, ...);
+
+	 The SQL commands that deals with the manipulation of data present in the database belong to DML or Data Manipulation Language 
+	 and this includes most of the SQL statements. INSERT – is used to insert data into a table.
+
+	 In that way we just insert the values in the tables.

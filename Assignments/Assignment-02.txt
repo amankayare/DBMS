@@ -1,0 +1,12 @@
+1) Which field of the Customers table is the primary key?
+Ans: c_num
+
+2) What is the 4th column of the Customers table?
+Ans: rating
+
+3) What is another word for row? For column?
+Ans:  A row also called a tuple, record, entity,opportunity and column is also known as attribute,method,field.
+
+4) Why isn’t it possible to see the first five rows of a table?
+Ans: Beacause row are scattered all over the DB server hard disk , no sequence is there and when you UPDATE a row ,
+     if the row length is increasing then the entire row may be moved to some other free address that's why its not possible.
