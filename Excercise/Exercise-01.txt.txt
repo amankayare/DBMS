@@ -1,0 +1,180 @@
+> create database exercises;
+
+1. Create the table SEMP with the following structure:
+
+	EMPNO CHAR(4)
+	EMPNAME CHAR(20)
+	BASIC FLOAT(9,2)
+	DEPTNO CHAR(2)
+	DEPTHEAD CHAR(4)
+	
+Ans:
+	create table semp (
+		emp_no int(4),
+		emp_name char(20),
+		basic float(9,2),
+		dept_no char(2),
+		dept_head char(4)
+     );
+	 
+2. Create the table SDEPT with the following structure:-
+	
+	DEPTNO CHAR(2)
+	DEPTNAME CHAR(15)
+	
+Ans:   create table s_dept(
+		dept_no char(2),
+		dept_name char(15)
+	   );
+	   
+	   
+3. Insert into the SDEPT table the following values:-
+	10, Development
+	20, Training
+	
+Ans: 
+		insert into s_dept (dept_no,dept_name)
+		values(10,'Development'),(20,'training');
+		
+4. Insert into the SEMP table the following values:-
+	0001, SUNIL, 6000, 10
+	0002, HIREN, 8000, 20
+	0003, ALI, 4000, 10, 0001
+	0004, GEORGE, 6000, 0002		
+	
+Ans:	insert into semp(emp_no,emp_name,basic,dept_no,dept_head)
+		values(0001,'SUNIL',6000,10,null),
+		(0002,'HIREN',8000,20,null),
+		(0003,'ALI',4000,10,0001),
+		(0004 ,'GEORGE',6000,null,0002);
+		
+		
+		
+		Create S, P, J, SPJ tables as specified below and insert a few rows in each table:-
+
+		SUPPLIER-S
+		(S#, Sname, Status, City)
+		PARTS-P
+		(P#, Pname, Color, Weight, City)
+		PROJECTS-J
+		(J#, Jname, City)
+		SUPPLIER-PARTS-PROJECT-SPJ
+		(S#, P#, J#, Qty)-	SPJ
+
+	
+		Sample data for S# column:- ‘S1’, ‘S2’, ‘S3’, etc.
+		Sample data for P# column:- ‘P1’, ‘P2’, ‘P3’, etc.
+		Sample data for J# column:- ‘J1’, ‘J2’, ‘J3’, etc.
+		Sample data for Status column:- 10, 20, 30, etc.
+		Write the SELECT queries to do the following:-
+		
+		
+		
+
+Ans:			
+mysql> CREATE TABLE S(
+          `S#` CHAR(2),
+          S_NAME VARCHAR(20),
+          STATUS INT(3),
+          city varchar(10)
+     );
+	 
+	 CREATE TABLE P(
+          `P#` CHAR(2),
+          P_NAME VARCHAR(20),
+          COLOR VARCHAR(7),
+          WEIGHT INT(10),
+		  CITY VARCHAR(10)
+     );
+	 
+	  CREATE TABLE J(
+          `J#` CHAR(2),
+          J_NAME VARCHAR(20),
+          CITY VARCHAR(10)
+     );
+	 
+	  CREATE TABLE SPJ(
+          `S#` CHAR(2),
+          `P#` INT(4),
+          `J#` INT(4),
+		   QTY INT (5)
+          
+     );
+	 
+	 
+	 
+	 INSERT INTO S (`S#`)
+	 VALUES('S1'),('S2'),('S3');
+	 
+	 
+	 INSERT INTO P (`P#`)
+	 VALUES('P1'),('P2'),('P3');
+	 
+	 
+	 INSERT INTO J (`J#`)
+	 VALUES('J1'),('J2'),('J3');
+	 
+	 UPDATE S SET STATUS = 20 WHERE `s#`='S2';
+	 UPDATE S SET STATUS = 20 WHERE `s#`='S2';
+	 UPDATE S SET STATUS = 30 WHERE `s#`='S3';
+	 
+Q: Write the SELECT queries to do the following:-
+
+5. Display all the data from the S table.
+Ans: SELECT * FROM S;
+
+6. Display only the S# and SNAME fields from the S table.
+Ans: SELECT `S#` , S_NAME FROM S;
+
+7. Display the P_NAME and COLOR from the P table for the CITY=”London”.
+Ans: SELECT P_NAME,COLOR FROM P WHERE CITY = "London";
+
+8. Display all the Suppliers from London.
+Ans: SELECT S_NAME FROM S WHERE CITY = "London";
+
+9. Display all the Suppliers from Paris or Athens.
+Ans: SELECT S_NAME FROM S WHERE CITY = "Paris" OR CITY = "AthenS";
+	 SELECT S_NAME FROM S WHERE CITY IN ("Paris","Athens");
+
+10. Display all the Projects in Athens.
+Ans: SELECT J_NAME FROM J WHERE CITY = "Athens";
+
+11. Display all the Partnames with the weight between 12 and 14 (inclusive of both).
+Ans: SELECT P_NAME FROM P WHERE WEIGHT >=12 AND WEIGHT<=14;
+	 SELECT P_NAME FROM P  WHERE WEIGHT BETWEEN 12 AND 14;
+	 
+12. Display all the Suppliers with a Status greater than or equal to 20.
+Ans:	SELECT S_NAME FROM S WHERE STATUS >= 20;
+
+13. Display all the Suppliers except the Suppliers from London.
+Ans:  SELECT S_NAME FROM S WHERE CITY !='London';
+
+14. Display only the Cities from where the Suppliers come from
+Ans: SELECT DISTINCT CITY FROM S;
+
+15. Assuming that the Part Weight is in GRAMS, display the same in MILLIGRAMS and KILOGRAMS.
+Ans:	
+		MILLIGRAMS: 
+		
+				SELECT WEIGHT*1000 AS "WEIGHT IN MILLIGRAMS" FROM P ;
+				SELECT WEIGHT*1000  "WEIGHT IN MILLIGRAMS" FROM P ;
+		
+		KILOGRAMS: 
+		
+				SELECT WEIGHT*0.001 AS "WEIGHT IN KILOGRAMS" FROM P ;
+				SELECT WEIGHT*0.001 "WEIGHT IN KILOGRAMS" FROM P ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
