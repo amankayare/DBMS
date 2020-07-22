@@ -1,0 +1,28 @@
+Dehadrai Page: 1
+Assignment – 9
+Querying Multiple Tables at Once.
+1) Write a query that lists each order number followed by the name of the customer who made the order.
+Ans:  
+
+		select o_num , c_name from orders , customers where orders.c_num = customers.c_num;
+		
+		
+2) Write a query that gives the names of both the salesperson and the customer for each order along with the order number.
+Ans:
+
+		
+		select s.s_name  , c.c_name , o.o_num from  orders o,customers c,sales_people s where o.c_num = c.c_num and o.s_num = s.s_num ;		
+		
+		
+3) Write a query that produces all customers serviced by salespeople with a commission above 12%.
+ Output the customer’s name, the salesperson’s name, and the salesperson’s rate of commission.
+Ans: 
+
+		select c.c_name , s.s_name , comm from customers c,sales_people s where c.s_num = s.s_num and comm > 0.12;
+		
+		
+		
+4) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.
+Ans:
+
+      		select o.o_num , amt*comm commission from orders o , customers c ,sales_people s where o.s_num = s.s_num and o.c_num = c.c_num and rating > 100; 
