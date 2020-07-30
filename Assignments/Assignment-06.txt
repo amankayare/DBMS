@@ -1,13 +1,13 @@
 						
 						Assignment-06 Using Special Operators in Conditions.
 						
-1) Write two different queries that would produce all orders taken on October 3rd or 4th, 1990.
+Q1 Write two different queries that would produce all orders taken on October 3rd or 4th, 1990.
 Ans: 
 		SELECT * FROM ORDERS WHERE O_DATE = '1990-10-03' OR O_DATE = '1990-10-04';
 		SELECT * FROM ORDERS WHERE O_DATE IN ('1990-10-03','1990-10-04');
 
 
-2) Write a query that selects all of the customers serviced by Peel or Motika.
+Q2 Write a query that selects all of the customers serviced by Peel or Motika.
 (Hint: the snum field relates the two tables to one another).
 Ans:
 
@@ -18,7 +18,7 @@ Ans:
 		SELECT * FROM CUSTOMERS WHERE s_num in (select s_num from sales_people where s_name = "Peel" or  s_name="Motika");
 
 
-3) Write a query that will produce all the customers whose names begin with a letter from ‘A’ to ‘G’.
+Q3 Write a query that will produce all the customers whose names begin with a letter from ‘A’ to ‘G’.
 Ans:
 		SELECT C_NAME FROM CUSTOMERS WHERE C_NAME LIKE '[A-G]%';
 		
@@ -28,12 +28,12 @@ Ans:
 
 		
 		
-4) Write a query that selects all customers whose names begin with the letter ‘C’.
+Q4 Write a query that selects all customers whose names begin with the letter ‘C’.
 Ans:
 		SELECT C_NAME FROM CUSTOMERS WHERE C_NAME LIKE 'C%';
 
 		
-5) Write a query that selects all orders except those with zeroes or NULLs in the amt field
+Q5 Write a query that selects all orders except those with zeroes or NULLs in the amt field
 Ans:
 
 		SELECT * FROM ORDERS WHERE AMT NOT IN (0,'NULL');

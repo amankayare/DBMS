@@ -1,4 +1,3 @@
-Dehadrai Page: 1
 Assignment – 9
 Querying Multiple Tables at Once.
 1) Write a query that lists each order number followed by the name of the customer who made the order.

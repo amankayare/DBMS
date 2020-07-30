@@ -1,26 +1,26 @@
 
 Assignment –7
 Summarizing Data with Aggregate Functions.
-1) Write a query that counts all orders for October 3.
+Q1 Write a query that counts all orders for October 3.
 Ans: 
 			select count(*) from orders where o_date = '90-10-3';
 
 
-2) Write a query that counts the number of different non-NULL city values in the Customers table.
+Q2 Write a query that counts the number of different non-NULL city values in the Customers table.
 Ans:   		select count(*) from customers where city is not null;
 
-3) Write a query that selects each customer’s smallest order.
+Q3 Write a query that selects each customer’s smallest order.
 Ans:
 			select c_num , min(amt) from orders group by c_num;
 
-4) Write a query that selects the first customer, in alphabetical order, whose name begins with G.
+Q4 Write a query that selects the first customer, in alphabetical order, whose name begins with G.
 Ans:
 			 select c_name from customers where c_name like 'G%' group by c_name like 'G%';
 
-5) Write a query that selects the highest rating in each city.
+Q5 Write a query that selects the highest rating in each city.
 Ans:
 			select city , max(rating) from customers group by city;
 			
-6) Write a query that counts the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.)
+Q6 Write a query that counts the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.)
 Ans: 		
 			select o_date ,count(distinct s_num) from orders group by o_date;

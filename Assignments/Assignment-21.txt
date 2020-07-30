@@ -1,0 +1,43 @@
+Assignment-21
+
+Q1 Give Amit the right to change the ratings of the customers.
+ create view cust_rate as select rating from customers;
+
+Ans:
+		grant select,update on cust_rate to Amit;
+
+
+Q2 Give Manoj the right to give other users the right to query the Orders table.
+
+Ans:	grant select on orders to manoj WITH grant OPTION;
+
+		grant select,update on manoj.orders to user
+
+
+
+Q3 Take the INSERT privilege on Salespeople away from Ajita.
+
+Ans:
+		revoke select, insert on sales_view from Ajita;
+
+
+Q4 Grant Abhijeet the right to insert or update the Customers table while keeping her
+possible rating values in the range of 100 to 500.
+
+Ans:
+
+		create view cust_view as
+        select * from customers where rating>=100 or rating<=500;
+		grant select,insert,update on cust_view to abhijeet;
+
+Q5 Allow Vikram to query the Customers table, but restrict his access to those
+customers whose rating is the lowest.
+
+Ans:
+
+				create or replace view restrict_cust as
+				select * from  customers
+				where rating NOT IN (select min(rating)
+					 from customers);
+				
+				grant select on restrictmin to vikram;
