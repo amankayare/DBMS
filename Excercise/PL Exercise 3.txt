@@ -1,0 +1,118 @@
+  PL EXERCISE 3   
+
+
+
+Q1
+
+delimiter //
+create procedure abc()
+begin
+	declare l int default 0;
+	while l <= 1000 do
+		set l=l+1;
+        if(mod(l,100)=0) then
+			select l;
+		end if;
+	end while;
+end; //
+delimiter ;
+
+call abc();
+
+
+Q2
+
+delimiter //
+create procedure abc(num int)
+begin
+	declare r int;
+	declare n int;
+	declare sum int default 0;
+	if(num>=1 and num<=999) then
+		set n=num;
+		while n>0 do
+			set r=mod(n,10);
+			set n = floor(n/10);
+			set sum = sum + r*r*r;
+		end while;
+        if(num=sum) then
+			select 'It is an Armstrong number';
+		else
+			select 'It is not an Armstrong number';
+		end if;
+	end if;
+end; //
+delimiter ;
+
+call abc(153);
+
+
+Q3
+
+delimiter //
+create procedure abc()
+begin
+	declare x int;
+    declare y int;
+    declare temp float(7,3);
+    create table rad_calc (radius float(7,3), circumference float(7,3), area float(7,3), volume float(7,3));
+    select min(id) into x from employee;
+	select max(id) into y from employee;
+    while x<=y do
+		set temp = round(4/3*3.143*x*x*x, 3);
+		insert into rad_calc (radius, circumference, area, volume) values(x, 2*3.143*x ,4*3.143*x*x, temp);
+        set x = x+1;
+	end while;
+    select * from rad_calc;
+    drop table rad_calc;
+end; //
+delimiter ;
+
+call abc();
+
+
+Q4
+
+delimiter //
+create procedure abc(str varchar(50))
+begin
+	declare rev varchar(50);
+    set rev = REVERSE(str);
+    if(rev=str) then
+		select 'Palindrome' check_palindrome;
+	else
+		select 'Not Palimdrome' check_palindrome;
+	end if;
+end; //
+delimiter ;
+
+call abc('level');
+
+
+Q5
+
+delimiter //
+create procedure abc()
+begin
+	declare x int default 1;
+    declare cnt int default 0;
+    declare rev char(15);
+	declare str varchar(15);
+	select lower(cname) into str from customers where cnum = 9999;
+    set x = length(str);
+    set rev='';
+    while x > 0 do
+		set rev = concat(rev,substr(str, x, 1));
+        set cnt = cnt + 1;
+        set x = x-1;
+	end while;
+    if(rev=str) then
+		select concat(str,' is Palindrome') as check_palindrome, concat(cnt, ' words read in') as 'count';
+	else
+		select concat(str,' is not Palindrome') as check_palindrome, concat(cnt,' words read in') as 'count';
+	end if;
+end; //
+delimiter ;
+
+call abc();
+

@@ -1,0 +1,94 @@
+     PL EXERCISE 3     
+
+
+
+Q1
+
+create table CUSTOMER (
+mnum varchar(4),
+mtype char(1),
+prev int(5),
+curr int(5),
+cust_type char(1),
+last_bill char(1));
+
+insert into CUSTOMER values
+('M001', 'T', 3740, 9700, 'A', 'Y'),
+('M002', 'S', 2740, 8800, 'I', 'N'),
+('M003', 'T', 3340, 4800, 'A', 'N'),
+('M004', 'S', 3210, 7200, 'A', 'Y'),
+('M005', 'T', 4300, 6600, 'C', 'N'),
+('M006', 'S', 1230, 3400, 'A', 'Y'),
+('M007', 'T', 730, 1200, 'R', 'Y'),
+('M008', 'S', 740, 900, 'I', 'N'),
+('M009', 'T', 5740, 9000, 'R', 'Y'),
+('M010', 'S', 8740, 13300, 'C', 'Y');
+
+create table BILL_CALC (
+mnum varchar(4),
+mtype char(1),
+rate float(3,2),
+amt float(7,3),
+scharge float(7,3),
+eduty float(7,3),
+net float(7,3)
+);
+
+delimiter //
+create procedure cust_cal()
+begin
+	declare num varchar(4);
+    declare mt char(1);
+    declare ctype char(1);
+    declare units int;
+    declare r float(3,2);
+    declare a float(7,3);
+    declare s float(7,3);
+    declare e float(7,3);
+    declare finished int(4) default 0;
+    declare n float(10,2);
+    declare cur int;
+    declare p int;
+    declare c1 cursor for select mnum, mtype, `prev`, curr, cust_type from lab.customer;
+	declare continue handler for not found set finished = 1;
+    open c1;
+    cursor_c1_loop:loop
+		fetch c1 into num, mt, p, cur, ctype;
+        if finished = 1 then
+			leave cursor_c1_loop;
+		end if;
+        set r = case ctype when 'A' then 1 when 'I' then 1.25 when 'C' then 1.50 when 'R' then 1.30 end;
+        set units = cur-p;
+        set a = r*units;
+        set s = case mt when 'S' then 0.05*units when 'T' then 0.1*units end;
+        set e = 0.3*(a+s);
+        set n = round(a+s+e,2);
+        insert into BILL_CALC values(num, mt, r, a, s, e, n);
+        end loop cursor_c1_loop;
+	close c1;
+    call bill_sum();
+	select * from BILL_CALC;
+    select * from bill_total;
+    drop table bill_total;
+end; //
+delimiter ;
+
+
+delimiter //
+create procedure bill_sum()
+begin
+    declare a float(10,2);
+    declare s float(10,2);
+    declare e float(10,2);
+    declare n float(10,2);
+    create table bill_total (tot_amt float(10,2), tot_scharge float(10,2), tot_eduty float(10,2), tot_net float(10,2));
+    select sum(amt) into a from BILL_CALC;
+    select sum(scharge) into s from BILL_CALC;
+    select sum(eduty) into e from BILL_CALC;
+    select sum(net) into n from BILL_CALC;
+    insert into bill_total values(a,s,e,n);
+end; //
+delimiter ;
+
+call cust_cal();
+
